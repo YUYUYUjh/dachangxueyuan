@@ -1,7 +1,14 @@
 package com.yy.algorithm.linked_list;
 
 public class ListNode {
-    int val;    // 当前节点保存的数据值
+    /**
+     * 当前节点保存的数据值
+     */
+    int val;
+
+    /**
+     * 下一个节点
+     */
     ListNode next;
 
     public ListNode() {

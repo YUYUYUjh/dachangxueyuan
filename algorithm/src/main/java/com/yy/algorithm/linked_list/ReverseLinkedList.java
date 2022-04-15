@@ -3,37 +3,37 @@ package com.yy.algorithm.linked_list;
 public class ReverseLinkedList {
     // 方法一：迭代
     public ListNode reverseList1(ListNode head){
-        // 定义两个指针，指向当前访问的节点，以及上一个节点
+        //定义两个指针 一个指向当前节点，一个指向上一个节点
         ListNode curr = head;
         ListNode prev = null;
 
-        // 依次迭代链表中的节点，将next指针指向prev
-        while (curr != null){
-            // 临时保存当前节点的下一个节点
-            ListNode tempNext = curr.next;
+        while (curr != null) {
+            //存储下一个节点
+            ListNode next = curr.next;
+            //将当前节点的next指向上一个节点
             curr.next = prev;
-
-            // 更新指针，当前指针变为之前的next，上一个指针变为curr
+            //更新当前节点和上一个节点
             prev = curr;
-            curr = tempNext;
+            curr = next;
         }
-        //  prev指向的就是末尾的节点，也就是翻转之后的头节点
         return prev;
     }
 
     // 方法二：递归
-    public ListNode reverseList(ListNode head){
+    public ListNode reverseList(ListNode listNode){
         // 基准情况
-        if (head == null || head.next == null) return head;
+        if (listNode == null || listNode.next == null) {
+            return listNode;
+        }
 
         // 递归调用，翻转剩余所有节点
-        ListNode restHead = head.next;
+        ListNode restHead = listNode.next;
         ListNode reversedRest = reverseList(restHead);
 
         // 把当前节点接在翻转之后的链表末尾
-        restHead.next = head;
+        restHead.next = listNode;
         // 当前节点就是链表末尾，直接指向null
-        head.next = null;
+        listNode.next = null;
 
         return reversedRest;
     }
@@ -55,16 +55,7 @@ public class ReverseLinkedList {
         TestLinkedList.printList(listNode1);
 
         ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
-        TestLinkedList.printList(reverseLinkedList.reverseList(listNode1));
+        TestLinkedList.printList(reverseLinkedList.reverseList1(listNode1));
     }
 
-    public ListNode reverseList10(ListNode head){
-        ListNode curr = null;
-        ListNode next = head.next;
-        while (next != null) {
-            curr = head;
-            next.next = head;
-        }
-        return head.next;
-    }
 }
